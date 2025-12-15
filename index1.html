@@ -1,23 +1,21 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Bento Landing Page - Nasiruddin</title>
+    <title>Laman Pendaratan Bento Pelajar - Nasiruddin (V4)</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     
     <style>
         /* CSS Reset and Global Styles */
         :root {
             /* Rule 4: Clean, Scientific, and Modern Color Palette */
-            --color-bg-primary: #f8f9fa; /* Soft White/Light Grey */
-            --color-bg-card: #ffffff;    /* Pure White */
-            --color-text-primary: #212529; /* Dark Grey/Black */
-            --color-text-secondary: #6c757d; /* Soft Grey */
-            /* UPDATED: Deep 'Ocean Blue' Accent Color */
-            --color-accent: #004d99;     /* Deep Ocean Blue (e.g., UMT theme) */ 
-            --color-border: #e9ecef;     /* Very Light Grey Border */
+            --color-bg-primary: #f8f9fa; 
+            --color-bg-card: #ffffff;    
+            --color-text-primary: #212529; 
+            --color-text-secondary: #6c757d; 
+            --color-accent: #004d99;     /* Deep Ocean Blue (UMT theme) */ 
+            --color-border: #e9ecef;     
             --font-family-primary: 'Inter', sans-serif;
             --border-radius: 12px;
             --spacing: 20px;
@@ -38,12 +36,11 @@
             margin: 0 auto;
         }
 
-        /* Bento Grid Layout (Desktop) */
+        /* Bento Grid Layout (Desktop) - 5 COLUMNS BASE */
         .bento-grid {
-            /* Rule 2: Grid layout on desktop */
             display: grid;
             gap: var(--spacing);
-            grid-template-columns: repeat(4, 1fr); /* Base 4-column layout */
+            grid-template-columns: repeat(5, 1fr); 
             grid-template-rows: auto auto 1fr; 
         }
 
@@ -53,14 +50,16 @@
             border-radius: var(--border-radius);
             padding: var(--spacing);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            /* Transition updated for smooth hover effect */
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease;
             display: flex;
             flex-direction: column;
         }
 
+        /* 3. Theme Tweak (Optional): Subtle scale up on hover */
         .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+            transform: scale(1.02); /* Subtle zoom */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
         /* Card Content Styling */
@@ -84,43 +83,53 @@
 
         /* Specific Card Sizing and Placement (Desktop) */
         
-        /* Card 1 (Profile): Large box (2x2) */
+        /* Card 1 (Profile): Large box (2 columns, 2 rows) - UPDATED FOR BACKGROUND IMAGE */
         .card-profile {
             grid-column: span 2;
             grid-row: span 2;
-        }
-
-        /* Card 2 (Location): Small box (1x1) - Top right area */
-        .card-location {
-            grid-column: span 1;
-        }
-
-        /* Card 3 (Tech Stack): Medium box (1x1) - Next to location */
-        .card-tech-stack {
-            grid-column: span 1;
+            
+            /* --- START: Background Image Properties for Profile Card --- */
+            /* Assuming 'bg.jpg' is in the same directory as this HTML file */
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('bg.jpg'); /* Added dark overlay */
+            background-size: cover; 
+            background-position: center; 
+            /* Text color change applied through specific selectors below */
+            border: none; /* Remove border for a cleaner image look */
         }
         
-        /* Card 4 (Case Study): Medium box (1x1) - Below Location */
-        .card-case-study {
-            grid-column: span 1;
+        /* Important: Update the text color for all elements inside the card-profile class */
+        .card-profile h3, 
+        .card-profile p,
+        .card-profile .meta-text {
+            color: #ffffff; /* White text for contrast */
         }
 
-        /* Card 5 (Hobby): Small box (1x1) - Below Tech Stack */
-        .card-hobby {
-            grid-column: span 1;
+        /* Adjust accent color for links within the profile card */
+        .card-profile .social-links a {
+            color: #b3d9ff; /* Light blue for links/accent on dark background */
+            border-top-color: rgba(255, 255, 255, 0.3); /* Lighter divider */
         }
         
-        /* Card 6 (Playlist): Wide box (4x1) - Bottom row */
-        .card-playlist {
-            grid-column: 1 / -1; 
-            min-height: 100px; 
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background-color: #f4f6f8; 
+        .card-profile .social-links a:hover {
+            color: #ffffff;
         }
+        
+        /* Resetting the default card styles for the background image card */
+        .card-profile {
+            background-color: transparent; /* Ensure card background is transparent to show image */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Stronger shadow to lift it */
+        }
+        /* --- END: Background Image Properties for Profile Card --- */
 
-        /* Social Links Specific Styling */
+        /* Positioning for other cards remains the same as previous step */
+        .card-location { grid-column: span 1; }
+        .card-tech-stack { grid-column: span 1; }
+        .card-case-study { grid-column: 3; grid-row: 2; }
+        .card-hobby { grid-column: 4; grid-row: 2; }
+        .card-reflection { grid-column: 5; grid-row: 2; }
+        .card-playlist { grid-column: 1 / -1; grid-row: 3; }
+
+        /* Social Links Specific Styling (General) */
         .social-links {
             margin-top: auto; 
             padding-top: 15px;
@@ -137,19 +146,16 @@
 
         .social-links a:hover {
             text-decoration: underline;
-            color: #003366; /* Darker blue on hover */
+            color: #003366; 
         }
 
         /* Media Query for Mobile Responsiveness */
         @media (max-width: 768px) {
-            /* Rule 2: Stacked vertically on mobile */
             .bento-grid {
                 display: flex; 
                 flex-direction: column;
-                grid-template-columns: 1fr; 
             }
 
-            /* Resetting grid-specific properties for mobile */
             .card {
                 grid-column: auto !important;
                 grid-row: auto !important;
@@ -166,77 +172,87 @@
 
     <div class="container">
         <header style="text-align: center; margin-bottom: var(--spacing);">
-            <h1 style="color: var(--color-text-primary); font-size: 2.5rem; font-weight: 900;">Student Science Hub</h1>
-            <p class="meta-text" style="font-size: 1.1rem;">A Modern Portfolio using the Bento Grid Design</p>
+            <h1 style="color: var(--color-text-primary); font-size: 2.5rem; font-weight: 900;">NASIRUDDIN's Portfolio</h1>
+            <p class="meta-text" style="font-size: 1.1rem;">AGROTEKNOLOGI SAINS TANAMAN | UMT</p>
         </header>
         
         <div class="bento-grid">
             
             <div class="card card-profile">
-                <h3>👨‍🎓 Student Profile: [NASIRUDDIN]</h3>
+                <h3>👨‍🎓 Profil Pelajar: [NASIRUDDIN]</h3>
                 <p style="font-size: 1.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 5px;">NASIRUDDIN</p>
                 <p class="meta-text" style="font-size: 1.1rem; margin-bottom: 20px;">
                     **Program:** AGROTEKNOLOGI SAINS TANAMAN <br>
-                    **Year:** Year 1
+                    **Tahun:** Tahun 1
                 </p>
                 
-                <p style="font-style: italic; color: var(--color-accent); font-weight: 600;">
-                    Tagline: 'Innovating food safety.'
+                <p style="font-style: italic; color: #b3d9ff; font-weight: 600;">
+                    Slogan: 'Innovating food safety.'
                 </p>
                 <p>
-                    Focused on the intersection of crop science and modern agricultural technology to enhance food sustainability and quality.
+                    Pelajar yang fokus pada persilangan sains tanaman dan teknologi pertanian moden untuk meningkatkan kelestarian dan kualiti makanan.
                 </p>
 
                 <div class="social-links">
-                    <a href="#linkedin">LinkedIn</a>
-                    <a href="#github">GitHub</a>
-                    <a href="#portal">UMT Portal</a>
+                    <a href="#" target="_blank">LinkedIn</a>
+                    <a href="#" target="_blank">GitHub</a>
+                    <a href="#" target="_blank">Portal UMT</a>
                 </div>
             </div>
 
             <div class="card card-location">
-                <h3>📍 Campus & Location</h3>
+                <h3>📍 Kampus & Lokasi</h3>
                 <p style="font-size: 1.8rem; font-weight: 700;">UMT</p>
                 <p class="meta-text">
                     Kuala Nerus, Terengganu
                 </p>
                 <p class="meta-text" style="margin-top: 15px;">
-                    (Time placeholder)
+                    (Masa Semasa: 12:24 PM, 15 Dis 2025)
                 </p>
             </div>
 
             <div class="card card-tech-stack">
-                <h3>📚 Key Skills & Subjects</h3>
+                <h3>📚 Kemahiran & Subjek Teras</h3>
                 <p style="font-size: 1.1rem; font-weight: 600; color: var(--color-accent);">Food Chemistry</p>
-                <p class="meta-text">Composition analysis and food reactions.</p>
+                <p class="meta-text">Analisis komposisi dan tindak balas makanan.</p>
                 <p style="font-size: 1.1rem; font-weight: 600; color: var(--color-accent);">Lab Analysis</p>
-                <p class="meta-text">Practical laboratory techniques and data handling.</p>
+                <p class="meta-text">Teknik makmal praktikal dan pengendalian data.</p>
                 <p style="font-size: 1.1rem; font-weight: 600; color: var(--color-accent);">Excel & Data</p>
-                <p class="meta-text">Data organization and basic statistical modeling.</p>
+                <p class="meta-text">Organisasi data dan pemodelan statistik asas.</p>
             </div>
 
             <div class="card card-case-study">
-                <h3>🔬 Recent Case Study</h3>
+                <h3>🔬 Kajian Kes Terkini</h3>
                 <p style="font-size: 1.1rem; font-weight: 700; line-height: 1.4;">
-                    Starch Gelatinization in Local Kuih
+                    Gelatinisasi Kanji dalam Kuih Tempatan
                 </p>
                 <p class="meta-text">
-                    **Project Description:** Analyzing texture profiles of traditional 'Kuih Lapis' by varying starch sources and heating times to control *gelatinization*.
+                    **Projek:** Menganalisis profil tekstur 'Kuih Lapis' tradisional dengan memvariasikan sumber kanji dan masa pemanasan untuk mengawal *gelatinisasi*.
                 </p>
             </div>
 
             <div class="card card-hobby">
-                <h3>🏖️ Daily Wellness</h3>
-                <p style="font-size: 1.8rem; font-weight: 700;">Evening Walks</p>
+                <h3>🏖️ Kesejahteraan Harian</h3>
+                <p style="font-size: 1.8rem; font-weight: 700;">Berjalan Petang</p>
                 <p class="meta-text">
-                    Relaxing at **Pantai UMT**. Essential for mental focus.
+                    Aktiviti riadah di **Pantai UMT**. Penting untuk fokus mental.
+                </p>
+            </div>
+
+            <div class="card card-reflection">
+                <h3>🌱 KENAPA PENTINGNYA SAINS PERTANIAN</h3>
+                <p style="font-style: italic; color: var(--color-accent); font-weight: 600;">
+                    Keselamatan makanan yang mampan adalah keutamaan negara.zzzzzzzzzzzzzzz
+                </p>
+                <p class="meta-text">
+                    Bidang ini penting untuk meningkatkan hasil tanaman, membangunkan varieti yang lebih tahan penyakit, dan memastikan pengeluaran makanan yang mencukupi serta berkualiti untuk masa depan.
                 </p>
             </div>
 
             <div class="card card-playlist">
-                <h3>🎧 Focus Playlist</h3>
+                <h3>🎧 Senarai Main Fokus</h3>
                 <p class="meta-text" style="font-size: 1.1rem;">
-                    **Classical Scores for Concentration** (Placeholder for an embedded music player component)
+                    **Classical Scores for Concentration** (<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/64qfw9JZl3RYCrq4Mn0WvT?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>)
                 </p>
             </div>
 
@@ -245,3 +261,4 @@
     
 </body>
 </html>
+    
